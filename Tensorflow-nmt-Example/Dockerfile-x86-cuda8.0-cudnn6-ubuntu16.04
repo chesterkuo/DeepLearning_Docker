@@ -10,6 +10,7 @@ ENV TENSORFLOW_PACKAGE https://ci.tensorflow.org/view/Nightly/job/nightly-matrix
 ENV TENSORFLOW_EXAMPLE tensorflow-nmt
 ENV TENSORFLOW_NMT_DATA "${TENSORFLOWBUILD}/${TENSORFLOW_EXAMPLE}/nmt_data"
 ENV TENSORFLOW_NMT_MODEL "${TENSORFLOWBUILD}/${TENSORFLOW_EXAMPLE}/nmt_model"
+ENV NMT_DOWNLOAD_SCRIPT download-wmt14.sh
 #ENV NMT_SRC vi
 ENV NMT_SRC de 
 ENV NMT_TGT en
@@ -28,7 +29,6 @@ CMD mkdir -p /tmp
 CMD mkdir -p ${TENSORFLOWBUILD}
 
 # for Tensorflow nightly build case 
-#COPY ${TENSORFLOW_PACKAGE} ${TENSORFLOWBUILD}/
 RUN wget ${TENSORFLOW_PACKAGE}
 
 RUN pip install ./*.whl 
@@ -38,13 +38,16 @@ RUN ldconfig
 
 RUN mkdir -p ${TENSORFLOW_NMT_DATA}
 RUN mkdir -p ${TENSORFLOW_NMT_MODEL}
-RUN /bin/sh ${TENSORFLOW_EXAMPLE}/nmt/scripts/wmt16_en_de.sh ${TENSORFLOW_NMT_DATA}
+# COPY script
+COPY ${NMT_DOWNLOAD_SCRIPT} ${TENSORFLOW_EXAMPLE}/nmt/scripts/
+RUN /bin/sh ${TENSORFLOW_EXAMPLE}/nmt/scripts/${NMT_DOWNLOAD_SCRIPT} ${TENSORFLOW_NMT_DATA}
 #RUN /bin/sh ${TENSORFLOW_EXAMPLE}/nmt/scripts/download_iwslt15.sh ${TENSORFLOW_NMT_DATA}
+
 # run Trainning
 # For Germany
-RUN cd ${TENSORFLOW_EXAMPLE} && echo "python -m nmt.nmt --src=${NMT_SRC} --tgt=${NMT_TGT} --train_prefix=${TENSORFLOW_NMT_DATA}/train --vocab_prefix=${TENSORFLOW_NMT_DATA}/vocab --dev_prefix=${TENSORFLOW_NMT_DATA}/tst2012 --test_prefix=${TENSORFLOW_NMT_DATA}/tst2013 --out_dir=${TENSORFLOW_NMT_MODEL} --num_train_steps=1000 --steps_per_stats=1000 --num_layers=8 --num_units=128 --dropout=0.2 --metrics=bleu" > train-nmt-de.sh
+RUN cd ${TENSORFLOW_EXAMPLE} && echo "python -m nmt.nmt --src=${NMT_SRC} --tgt=${NMT_TGT} --train_prefix=${TENSORFLOW_NMT_DATA}/train --vocab_prefix=${TENSORFLOW_NMT_DATA}/vocab.50k --dev_prefix=${TENSORFLOW_NMT_DATA}/tst2012 --test_prefix=${TENSORFLOW_NMT_DATA}/tst2013 --out_dir=${TENSORFLOW_NMT_MODEL} --num_train_steps=12000 --steps_per_stats=100 --num_layers=2 --num_units=128 --dropout=0.2 --metrics=bleu" > train-nmt-de.sh
 
 # for Vietnamese
 #RUN cd ${TENSORFLOW_EXAMPLE} && echo "python -m nmt.nmt --src=${NMT_SRC} --tgt=${NMT_TGT} --train_prefix=${TENSORFLOW_NMT_DATA}/train --vocab_prefix=${TENSORFLOW_NMT_DATA}/vocab --dev_prefix=${TENSORFLOW_NMT_DATA}/tst2012 --test_prefix=${TENSORFLOW_NMT_DATA}/tst2013 --out_dir=${TENSORFLOW_NMT_MODEL} --num_train_steps=1000 --steps_per_stats=100 --num_layers=2 --num_units=128 --dropout=0.2 --metrics=bleu" > train-nmt.sh
 
-RUN chmod +x ${TENSORFLOW_EXAMPLE}/train-nmt.sh
+RUN chmod 755 ${TENSORFLOWBUILD}/${TENSORFLOW_EXAMPLE}/train-nmt-de.sh
