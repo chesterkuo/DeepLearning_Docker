@@ -1,0 +1,6 @@
+model_checkpoint_path: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-92000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-88000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-89000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-90000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-91000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/translate.ckpt-92000"

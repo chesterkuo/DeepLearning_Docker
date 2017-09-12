@@ -1,0 +1,6 @@
+model_checkpoint_path: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-87000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-25000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-27000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-32000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-63000"
+all_model_checkpoint_paths: "/tmp/tensorflow-build/tensorflow-nmt/nmt_attention_model/best_bleu/translate.ckpt-87000"
