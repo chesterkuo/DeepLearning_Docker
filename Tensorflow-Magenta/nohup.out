@@ -1,0 +1,1678 @@
+Sending build context to Docker daemon 5.632 kB
+Step 1/31 : FROM tensorflow-build-gpu:1.3
+ ---> 3a8439092374
+Step 2/31 : MAINTAINER Chester Kuo <chester.kuo@gmail.com>
+ ---> Running in 410d822f66c7
+ ---> a2d55cdce81e
+Removing intermediate container 410d822f66c7
+Step 3/31 : ENV http_proxy http://proxy-chain.intel.com:911
+ ---> Running in 29cdf3b87612
+ ---> 227fd26a1335
+Removing intermediate container 29cdf3b87612
+Step 4/31 : ENV https_proxy https://proxy-chain.intel.com:912
+ ---> Running in 40d835bf94da
+ ---> 6dd83c0c4b95
+Removing intermediate container 40d835bf94da
+Step 5/31 : ENV HTTP_PROXY http://proxy-chain.intel.com:911
+ ---> Running in 6ca871b644c7
+ ---> 483092043b45
+Removing intermediate container 6ca871b644c7
+Step 6/31 : ENV HTTPS_PROXY https://proxy-chain.intel.com:912
+ ---> Running in c98b00c614bf
+ ---> a6dd8cb97d22
+Removing intermediate container c98b00c614bf
+Step 7/31 : ENV MAGENTA_REF v0.3.1
+ ---> Running in e50c08b177e1
+ ---> 9a61cc973b3b
+Removing intermediate container e50c08b177e1
+Step 8/31 : RUN apt-get update
+ ---> Running in 3eed18fe7c35
+Ign:1 http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64  InRelease
+Get:2 http://archive.ubuntu.com/ubuntu xenial InRelease [247 kB]
+Get:3 http://security.ubuntu.com/ubuntu xenial-security InRelease [102 kB]
+Ign:4 http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64  InRelease
+Get:5 http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64  Release [564 B]
+Get:6 http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64  Release [564 B]
+Get:7 http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64  Release.gpg [801 B]
+Get:8 http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64  Release.gpg [801 B]
+Get:9 http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64  Packages [78.7 kB]
+Get:10 http://archive.ubuntu.com/ubuntu xenial-updates InRelease [102 kB]
+Get:11 http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64  Packages [10.5 kB]
+Get:12 http://security.ubuntu.com/ubuntu xenial-security/universe Sources [50.4 kB]
+Get:13 http://security.ubuntu.com/ubuntu xenial-security/main amd64 Packages [453 kB]
+Get:14 http://archive.ubuntu.com/ubuntu xenial-backports InRelease [102 kB]
+Get:15 http://archive.ubuntu.com/ubuntu xenial/universe Sources [9802 kB]
+Get:16 http://security.ubuntu.com/ubuntu xenial-security/restricted amd64 Packages [12.8 kB]
+Get:17 http://security.ubuntu.com/ubuntu xenial-security/universe amd64 Packages [213 kB]
+Get:18 http://security.ubuntu.com/ubuntu xenial-security/multiverse amd64 Packages [2928 B]
+Get:19 http://archive.ubuntu.com/ubuntu xenial/main amd64 Packages [1558 kB]
+Get:20 http://archive.ubuntu.com/ubuntu xenial/restricted amd64 Packages [14.1 kB]
+Get:21 http://archive.ubuntu.com/ubuntu xenial/universe amd64 Packages [9827 kB]
+Get:22 http://archive.ubuntu.com/ubuntu xenial/multiverse amd64 Packages [176 kB]
+Get:23 http://archive.ubuntu.com/ubuntu xenial-updates/universe Sources [221 kB]
+Get:24 http://archive.ubuntu.com/ubuntu xenial-updates/main amd64 Packages [821 kB]
+Get:25 http://archive.ubuntu.com/ubuntu xenial-updates/restricted amd64 Packages [13.5 kB]
+Get:26 http://archive.ubuntu.com/ubuntu xenial-updates/universe amd64 Packages [689 kB]
+Get:27 http://archive.ubuntu.com/ubuntu xenial-updates/multiverse amd64 Packages [17.5 kB]
+Get:28 http://archive.ubuntu.com/ubuntu xenial-backports/main amd64 Packages [5176 B]
+Get:29 http://archive.ubuntu.com/ubuntu xenial-backports/universe amd64 Packages [6354 B]
+Fetched 24.5 MB in 18s (1357 kB/s)
+Reading package lists...
+ ---> cdb6cb3ecccb
+Removing intermediate container 3eed18fe7c35
+Step 9/31 : RUN apt-get install -y libasound2-dev
+ ---> Running in a6a91d641a83
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Suggested packages:
+  libasound2-doc
+The following NEW packages will be installed:
+  libasound2-dev
+0 upgraded, 1 newly installed, 0 to remove and 8 not upgraded.
+Need to get 114 kB of archives.
+After this operation, 544 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu xenial/main amd64 libasound2-dev amd64 1.1.0-0ubuntu1 [114 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 114 kB in 0s (126 kB/s)
+Selecting previously unselected package libasound2-dev:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 17356 files and directories currently installed.)
+Preparing to unpack .../libasound2-dev_1.1.0-0ubuntu1_amd64.deb ...
+Unpacking libasound2-dev:amd64 (1.1.0-0ubuntu1) ...
+Setting up libasound2-dev:amd64 (1.1.0-0ubuntu1) ...
+ ---> f281ed4b3a69
+Removing intermediate container a6a91d641a83
+Step 10/31 : RUN pip install 'librosa>=0.5.1'
+ ---> Running in e4376ee37692
+Collecting librosa>=0.5.1
+  Downloading librosa-0.5.1.tar.gz (1.5MB)
+Collecting audioread>=2.0.0 (from librosa>=0.5.1)
+  Downloading audioread-2.1.5.tar.gz
+Requirement already satisfied: numpy>=1.8.0 in /usr/local/lib/python2.7/dist-packages (from librosa>=0.5.1)
+Requirement already satisfied: scipy>=0.13.0 in /usr/local/lib/python2.7/dist-packages (from librosa>=0.5.1)
+Requirement already satisfied: scikit-learn>=0.14.0 in /usr/local/lib/python2.7/dist-packages (from librosa>=0.5.1)
+Collecting joblib>=0.7.0 (from librosa>=0.5.1)
+  Downloading joblib-0.11-py2.py3-none-any.whl (176kB)
+Requirement already satisfied: decorator>=3.0.0 in /usr/local/lib/python2.7/dist-packages (from librosa>=0.5.1)
+Requirement already satisfied: six>=1.3 in /usr/local/lib/python2.7/dist-packages (from librosa>=0.5.1)
+Collecting resampy>=0.1.2 (from librosa>=0.5.1)
+  Downloading resampy-0.2.0.tar.gz (322kB)
+Collecting numba>=0.32 (from resampy>=0.1.2->librosa>=0.5.1)
+  Downloading numba-0.35.0-cp27-cp27mu-manylinux1_x86_64.whl (1.8MB)
+Requirement already satisfied: singledispatch in /usr/local/lib/python2.7/dist-packages (from numba>=0.32->resampy>=0.1.2->librosa>=0.5.1)
+Requirement already satisfied: funcsigs in /usr/local/lib/python2.7/dist-packages (from numba>=0.32->resampy>=0.1.2->librosa>=0.5.1)
+Collecting llvmlite (from numba>=0.32->resampy>=0.1.2->librosa>=0.5.1)
+  Downloading llvmlite-0.20.0-cp27-cp27mu-manylinux1_x86_64.whl (13.3MB)
+Requirement already satisfied: enum34 in /usr/local/lib/python2.7/dist-packages (from numba>=0.32->resampy>=0.1.2->librosa>=0.5.1)
+Building wheels for collected packages: librosa, audioread, resampy
+  Running setup.py bdist_wheel for librosa: started
+  Running setup.py bdist_wheel for librosa: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/7a/bf/9f/fc279e1814da2144161848a7419cdcf923d0c03f481abe7904
+  Running setup.py bdist_wheel for audioread: started
+  Running setup.py bdist_wheel for audioread: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/47/cc/d8/e1476000d1720a72117ef5c0b1a51388b8567ebfface47ede7
+  Running setup.py bdist_wheel for resampy: started
+  Running setup.py bdist_wheel for resampy: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/c6/8e/c0/4c402972789ddf6d2d701468417de19d0cad28bd698a867e2d
+Successfully built librosa audioread resampy
+Installing collected packages: audioread, joblib, llvmlite, numba, resampy, librosa
+Successfully installed audioread-2.1.5 joblib-0.11 librosa-0.5.1 llvmlite-0.20.0 numba-0.35.0 resampy-0.2.0
+ ---> 9991f0dbd3bf
+Removing intermediate container e4376ee37692
+Step 11/31 : RUN pip install 'scipy>=0.18.1'
+ ---> Running in f8298c77944e
+Requirement already satisfied: scipy>=0.18.1 in /usr/local/lib/python2.7/dist-packages
+Requirement already satisfied: numpy>=1.8.2 in /usr/local/lib/python2.7/dist-packages (from scipy>=0.18.1)
+ ---> af9c221279e2
+Removing intermediate container f8298c77944e
+Step 12/31 : RUN pip install 'Pillow>=3.4.2'
+ ---> Running in d4387604ee9d
+Collecting Pillow>=3.4.2
+  Downloading Pillow-4.2.1-cp27-cp27mu-manylinux1_x86_64.whl (5.8MB)
+Collecting olefile (from Pillow>=3.4.2)
+  Downloading olefile-0.44.zip (74kB)
+Building wheels for collected packages: olefile
+  Running setup.py bdist_wheel for olefile: started
+  Running setup.py bdist_wheel for olefile: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/20/58/49/cc7bd00345397059149a10b0259ef38b867935ea2ecff99a9b
+Successfully built olefile
+Installing collected packages: olefile, Pillow
+Successfully installed Pillow-4.2.1 olefile-0.44
+ ---> 7c5a1453ee92
+Removing intermediate container d4387604ee9d
+Step 13/31 : RUN pip install 'bokeh>=0.12.0'
+ ---> Running in e4603518c72b
+Collecting bokeh>=0.12.0
+  Downloading bokeh-0.12.9.tar.gz (15.7MB)
+Requirement already satisfied: six>=1.5.2 in /usr/local/lib/python2.7/dist-packages (from bokeh>=0.12.0)
+Collecting PyYAML>=3.10 (from bokeh>=0.12.0)
+  Downloading PyYAML-3.12.tar.gz (253kB)
+Requirement already satisfied: python-dateutil>=2.1 in /usr/local/lib/python2.7/dist-packages (from bokeh>=0.12.0)
+Requirement already satisfied: Jinja2>=2.7 in /usr/local/lib/python2.7/dist-packages (from bokeh>=0.12.0)
+Requirement already satisfied: numpy>=1.7.1 in /usr/local/lib/python2.7/dist-packages (from bokeh>=0.12.0)
+Requirement already satisfied: tornado>=4.3 in /usr/local/lib/python2.7/dist-packages (from bokeh>=0.12.0)
+Collecting futures>=3.0.3 (from bokeh>=0.12.0)
+  Downloading futures-3.1.1-py2-none-any.whl
+Requirement already satisfied: MarkupSafe>=0.23 in /usr/local/lib/python2.7/dist-packages (from Jinja2>=2.7->bokeh>=0.12.0)
+Requirement already satisfied: singledispatch in /usr/local/lib/python2.7/dist-packages (from tornado>=4.3->bokeh>=0.12.0)
+Requirement already satisfied: certifi in /usr/local/lib/python2.7/dist-packages (from tornado>=4.3->bokeh>=0.12.0)
+Requirement already satisfied: backports_abc>=0.4 in /usr/local/lib/python2.7/dist-packages (from tornado>=4.3->bokeh>=0.12.0)
+Building wheels for collected packages: bokeh, PyYAML
+  Running setup.py bdist_wheel for bokeh: started
+  Running setup.py bdist_wheel for bokeh: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/be/a4/af/1b2215f9a915cb98262c90b9e88ad6e319ae17b2927962bf32
+  Running setup.py bdist_wheel for PyYAML: started
+  Running setup.py bdist_wheel for PyYAML: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/2c/f7/79/13f3a12cd723892437c0cfbde1230ab4d82947ff7b3839a4fc
+Successfully built bokeh PyYAML
+Installing collected packages: PyYAML, futures, bokeh
+Successfully installed PyYAML-3.12 bokeh-0.12.9 futures-3.1.1
+ ---> 2a3ee77a62c7
+Removing intermediate container e4603518c72b
+Step 14/31 : RUN pip install 'intervaltree>=2.1.0'
+ ---> Running in 2c751353e9a6
+Collecting intervaltree>=2.1.0
+  Downloading intervaltree-2.1.0.tar.gz
+Collecting sortedcontainers (from intervaltree>=2.1.0)
+  Downloading sortedcontainers-1.5.7-py2.py3-none-any.whl
+Building wheels for collected packages: intervaltree
+  Running setup.py bdist_wheel for intervaltree: started
+  Running setup.py bdist_wheel for intervaltree: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/89/40/01/fa05b5a8202a472fb143815e7589fdf74369e710ca675cad11
+Successfully built intervaltree
+Installing collected packages: sortedcontainers, intervaltree
+Successfully installed intervaltree-2.1.0 sortedcontainers-1.5.7
+ ---> 522733dd365b
+Removing intermediate container 2c751353e9a6
+Step 15/31 : RUN pip install 'matplotlib >= 1.5.3'
+ ---> Running in 56ea835fd2c4
+Requirement already satisfied: matplotlib>=1.5.3 in /usr/local/lib/python2.7/dist-packages
+Requirement already satisfied: numpy>=1.7.1 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: functools32 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: six>=1.10 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: pytz in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=1.5.6 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+Requirement already satisfied: subprocess32 in /usr/local/lib/python2.7/dist-packages (from matplotlib>=1.5.3)
+ ---> 415746a6983d
+Removing intermediate container 56ea835fd2c4
+Step 16/31 : RUN pip install 'mido==1.2.6'
+ ---> Running in 4b9986e638fc
+Collecting mido==1.2.6
+  Downloading mido-1.2.6-py2.py3-none-any.whl (69kB)
+Installing collected packages: mido
+Successfully installed mido-1.2.6
+ ---> 478e94b1f053
+Removing intermediate container 4b9986e638fc
+Step 17/31 : RUN pip install 'numpy>=1.11.0'
+ ---> Running in b66002d7dbc7
+Requirement already satisfied: numpy>=1.11.0 in /usr/local/lib/python2.7/dist-packages
+ ---> bea7a4c5533d
+Removing intermediate container b66002d7dbc7
+Step 18/31 : RUN pip install 'pandas>=0.18.1'
+ ---> Running in 300714d67d84
+Requirement already satisfied: pandas>=0.18.1 in /usr/local/lib/python2.7/dist-packages
+Requirement already satisfied: pytz>=2011k in /usr/local/lib/python2.7/dist-packages (from pandas>=0.18.1)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python2.7/dist-packages (from pandas>=0.18.1)
+Requirement already satisfied: numpy>=1.7.0 in /usr/local/lib/python2.7/dist-packages (from pandas>=0.18.1)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python2.7/dist-packages (from python-dateutil->pandas>=0.18.1)
+ ---> c23d9bfdb31b
+Removing intermediate container 300714d67d84
+Step 19/31 : RUN pip install 'pretty_midi>=0.2.6'
+ ---> Running in bfb5e177305a
+Collecting pretty_midi>=0.2.6
+  Downloading pretty_midi-0.2.8.tar.gz (5.6MB)
+Requirement already satisfied: numpy>=1.7.0 in /usr/local/lib/python2.7/dist-packages (from pretty_midi>=0.2.6)
+Requirement already satisfied: mido>=1.1.16 in /usr/local/lib/python2.7/dist-packages (from pretty_midi>=0.2.6)
+Requirement already satisfied: six in /usr/local/lib/python2.7/dist-packages (from pretty_midi>=0.2.6)
+Building wheels for collected packages: pretty-midi
+  Running setup.py bdist_wheel for pretty-midi: started
+  Running setup.py bdist_wheel for pretty-midi: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/8b/ba/2e/151fa65f40abe65c4d7804f70223b07d70fcf7f4ef3fba56f2
+Successfully built pretty-midi
+Installing collected packages: pretty-midi
+Successfully installed pretty-midi-0.2.8
+ ---> 95923c286ac1
+Removing intermediate container bfb5e177305a
+Step 20/31 : RUN pip install  futures python-rtmidi wheel
+ ---> Running in 718362f74fa0
+Requirement already satisfied: futures in /usr/local/lib/python2.7/dist-packages
+Collecting python-rtmidi
+  Downloading python-rtmidi-1.1.0.zip (219kB)
+Requirement already satisfied: wheel in /usr/local/lib/python2.7/dist-packages
+Building wheels for collected packages: python-rtmidi
+  Running setup.py bdist_wheel for python-rtmidi: started
+  Running setup.py bdist_wheel for python-rtmidi: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/ce/1d/4a/9f6d3d59b4b138c38577dcd03656fb29d8c31456d2c6982c3b
+Successfully built python-rtmidi
+Installing collected packages: python-rtmidi
+Successfully installed python-rtmidi-1.1.0
+ ---> 0ca3de37d5cc
+Removing intermediate container 718362f74fa0
+Step 21/31 : WORKDIR /
+ ---> 47eb7dcd1f5d
+Removing intermediate container 616c56639a0a
+Step 22/31 : RUN ls -lah /usr/local/cuda/lib64/*
+ ---> Running in eaa3f0a7e6dd
+lrwxrwxrwx 1 root root    14 Jan 26  2017 /usr/local/cuda/lib64/libOpenCL.so -> libOpenCL.so.1
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libOpenCL.so.1 -> libOpenCL.so.1.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libOpenCL.so.1.0 -> libOpenCL.so.1.0.0
+-rw-r--r-- 1 root root   26K Jan 26  2017 /usr/local/cuda/lib64/libOpenCL.so.1.0.0
+lrwxrwxrwx 1 root root    16 Jun  6 19:46 /usr/local/cuda/lib64/libcublas.so -> libcublas.so.8.0
+lrwxrwxrwx 1 root root    19 Jun  6 19:46 /usr/local/cuda/lib64/libcublas.so.8.0 -> libcublas.so.8.0.88
+-rw-r--r-- 1 root root   41M Jun  6 19:41 /usr/local/cuda/lib64/libcublas.so.8.0.61
+-rw-r--r-- 1 root root   47M Jun  6 19:42 /usr/local/cuda/lib64/libcublas.so.8.0.88
+-rw-r--r-- 1 root root   61M Jun  6 19:41 /usr/local/cuda/lib64/libcublas_device.a
+-rw-r--r-- 1 root root   53M Jun  6 19:41 /usr/local/cuda/lib64/libcublas_static.a
+-rw-r--r-- 1 root root  543K Jan 26  2017 /usr/local/cuda/lib64/libcudadevrt.a
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libcudart.so -> libcudart.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libcudart.so.8.0 -> libcudart.so.8.0.61
+-rw-r--r-- 1 root root  406K Jan 26  2017 /usr/local/cuda/lib64/libcudart.so.8.0.61
+-rw-r--r-- 1 root root  757K Jan 26  2017 /usr/local/cuda/lib64/libcudart_static.a
+lrwxrwxrwx 1 root root    15 Jan 26  2017 /usr/local/cuda/lib64/libcufft.so -> libcufft.so.8.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libcufft.so.8.0 -> libcufft.so.8.0.61
+-rw-r--r-- 1 root root  140M Jan 26  2017 /usr/local/cuda/lib64/libcufft.so.8.0.61
+-rw-r--r-- 1 root root  124M Jan 26  2017 /usr/local/cuda/lib64/libcufft_static.a
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libcufftw.so -> libcufftw.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libcufftw.so.8.0 -> libcufftw.so.8.0.61
+-rw-r--r-- 1 root root  466K Jan 26  2017 /usr/local/cuda/lib64/libcufftw.so.8.0.61
+-rw-r--r-- 1 root root   42K Jan 26  2017 /usr/local/cuda/lib64/libcufftw_static.a
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libcuinj64.so -> libcuinj64.so.8.0
+lrwxrwxrwx 1 root root    20 Jan 26  2017 /usr/local/cuda/lib64/libcuinj64.so.8.0 -> libcuinj64.so.8.0.61
+-rw-r--r-- 1 root root  6.2M Jan 26  2017 /usr/local/cuda/lib64/libcuinj64.so.8.0.61
+-rw-r--r-- 1 root root  1.6M Jan 26  2017 /usr/local/cuda/lib64/libculibos.a
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libcurand.so -> libcurand.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libcurand.so.8.0 -> libcurand.so.8.0.61
+-rw-r--r-- 1 root root   57M Jan 26  2017 /usr/local/cuda/lib64/libcurand.so.8.0.61
+-rw-r--r-- 1 root root   57M Jan 26  2017 /usr/local/cuda/lib64/libcurand_static.a
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libcusolver.so -> libcusolver.so.8.0
+lrwxrwxrwx 1 root root    21 Jan 26  2017 /usr/local/cuda/lib64/libcusolver.so.8.0 -> libcusolver.so.8.0.61
+-rw-r--r-- 1 root root   52M Jan 26  2017 /usr/local/cuda/lib64/libcusolver.so.8.0.61
+-rw-r--r-- 1 root root   22M Jan 26  2017 /usr/local/cuda/lib64/libcusolver_static.a
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libcusparse.so -> libcusparse.so.8.0
+lrwxrwxrwx 1 root root    21 Jan 26  2017 /usr/local/cuda/lib64/libcusparse.so.8.0 -> libcusparse.so.8.0.61
+-rw-r--r-- 1 root root   42M Jan 26  2017 /usr/local/cuda/lib64/libcusparse.so.8.0.61
+-rw-r--r-- 1 root root   50M Jan 26  2017 /usr/local/cuda/lib64/libcusparse_static.a
+lrwxrwxrwx 1 root root    14 Jan 26  2017 /usr/local/cuda/lib64/libnppc.so -> libnppc.so.8.0
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnppc.so.8.0 -> libnppc.so.8.0.61
+-rw-r--r-- 1 root root  446K Jan 26  2017 /usr/local/cuda/lib64/libnppc.so.8.0.61
+-rw-r--r-- 1 root root   24K Jan 26  2017 /usr/local/cuda/lib64/libnppc_static.a
+lrwxrwxrwx 1 root root    14 Jan 26  2017 /usr/local/cuda/lib64/libnppi.so -> libnppi.so.8.0
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnppi.so.8.0 -> libnppi.so.8.0.61
+-rw-r--r-- 1 root root  104M Jan 26  2017 /usr/local/cuda/lib64/libnppi.so.8.0.61
+-rw-r--r-- 1 root root  131M Jan 26  2017 /usr/local/cuda/lib64/libnppi_static.a
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libnppial.so -> libnppial.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libnppial.so.8.0 -> libnppial.so.8.0.61
+-rw-r--r-- 1 root root  9.7M Jan 26  2017 /usr/local/cuda/lib64/libnppial.so.8.0.61
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libnppicc.so -> libnppicc.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libnppicc.so.8.0 -> libnppicc.so.8.0.61
+-rw-r--r-- 1 root root  3.7M Jan 26  2017 /usr/local/cuda/lib64/libnppicc.so.8.0.61
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnppicom.so -> libnppicom.so.8.0
+lrwxrwxrwx 1 root root    20 Jan 26  2017 /usr/local/cuda/lib64/libnppicom.so.8.0 -> libnppicom.so.8.0.61
+-rw-r--r-- 1 root root 1007K Jan 26  2017 /usr/local/cuda/lib64/libnppicom.so.8.0.61
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnppidei.so -> libnppidei.so.8.0
+lrwxrwxrwx 1 root root    20 Jan 26  2017 /usr/local/cuda/lib64/libnppidei.so.8.0 -> libnppidei.so.8.0.61
+-rw-r--r-- 1 root root  6.8M Jan 26  2017 /usr/local/cuda/lib64/libnppidei.so.8.0.61
+lrwxrwxrwx 1 root root    15 Jan 26  2017 /usr/local/cuda/lib64/libnppif.so -> libnppif.so.8.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libnppif.so.8.0 -> libnppif.so.8.0.61
+-rw-r--r-- 1 root root   46M Jan 26  2017 /usr/local/cuda/lib64/libnppif.so.8.0.61
+lrwxrwxrwx 1 root root    15 Jan 26  2017 /usr/local/cuda/lib64/libnppig.so -> libnppig.so.8.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libnppig.so.8.0 -> libnppig.so.8.0.61
+-rw-r--r-- 1 root root   21M Jan 26  2017 /usr/local/cuda/lib64/libnppig.so.8.0.61
+lrwxrwxrwx 1 root root    15 Jan 26  2017 /usr/local/cuda/lib64/libnppim.so -> libnppim.so.8.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libnppim.so.8.0 -> libnppim.so.8.0.61
+-rw-r--r-- 1 root root  4.2M Jan 26  2017 /usr/local/cuda/lib64/libnppim.so.8.0.61
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libnppist.so -> libnppist.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libnppist.so.8.0 -> libnppist.so.8.0.61
+-rw-r--r-- 1 root root   14M Jan 26  2017 /usr/local/cuda/lib64/libnppist.so.8.0.61
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libnppisu.so -> libnppisu.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libnppisu.so.8.0 -> libnppisu.so.8.0.61
+-rw-r--r-- 1 root root  438K Jan 26  2017 /usr/local/cuda/lib64/libnppisu.so.8.0.61
+lrwxrwxrwx 1 root root    16 Jan 26  2017 /usr/local/cuda/lib64/libnppitc.so -> libnppitc.so.8.0
+lrwxrwxrwx 1 root root    19 Jan 26  2017 /usr/local/cuda/lib64/libnppitc.so.8.0 -> libnppitc.so.8.0.61
+-rw-r--r-- 1 root root  2.8M Jan 26  2017 /usr/local/cuda/lib64/libnppitc.so.8.0.61
+lrwxrwxrwx 1 root root    14 Jan 26  2017 /usr/local/cuda/lib64/libnpps.so -> libnpps.so.8.0
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnpps.so.8.0 -> libnpps.so.8.0.61
+-rw-r--r-- 1 root root  7.8M Jan 26  2017 /usr/local/cuda/lib64/libnpps.so.8.0.61
+-rw-r--r-- 1 root root   11M Jan 26  2017 /usr/local/cuda/lib64/libnpps_static.a
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libnvToolsExt.so -> libnvToolsExt.so.1
+lrwxrwxrwx 1 root root    22 Jan 26  2017 /usr/local/cuda/lib64/libnvToolsExt.so.1 -> libnvToolsExt.so.1.0.0
+-rw-r--r-- 1 root root   37K Jan 26  2017 /usr/local/cuda/lib64/libnvToolsExt.so.1.0.0
+lrwxrwxrwx 1 root root    16 Jun  6 19:46 /usr/local/cuda/lib64/libnvblas.so -> libnvblas.so.8.0
+lrwxrwxrwx 1 root root    19 Jun  6 19:46 /usr/local/cuda/lib64/libnvblas.so.8.0 -> libnvblas.so.8.0.88
+-rw-r--r-- 1 root root  487K Jun  6 19:41 /usr/local/cuda/lib64/libnvblas.so.8.0.61
+-rw-r--r-- 1 root root  497K Jun  6 19:42 /usr/local/cuda/lib64/libnvblas.so.8.0.88
+lrwxrwxrwx 1 root root    17 Jan 26  2017 /usr/local/cuda/lib64/libnvgraph.so -> libnvgraph.so.8.0
+lrwxrwxrwx 1 root root    20 Jan 26  2017 /usr/local/cuda/lib64/libnvgraph.so.8.0 -> libnvgraph.so.8.0.61
+-rw-r--r-- 1 root root  5.0M Jan 26  2017 /usr/local/cuda/lib64/libnvgraph.so.8.0.61
+-rw-r--r-- 1 root root  7.8M Jan 26  2017 /usr/local/cuda/lib64/libnvgraph_static.a
+lrwxrwxrwx 1 root root    24 Jan 26  2017 /usr/local/cuda/lib64/libnvrtc-builtins.so -> libnvrtc-builtins.so.8.0
+lrwxrwxrwx 1 root root    27 Jan 26  2017 /usr/local/cuda/lib64/libnvrtc-builtins.so.8.0 -> libnvrtc-builtins.so.8.0.61
+-rw-r--r-- 1 root root  9.3M Jan 26  2017 /usr/local/cuda/lib64/libnvrtc-builtins.so.8.0.61
+lrwxrwxrwx 1 root root    15 Jan 26  2017 /usr/local/cuda/lib64/libnvrtc.so -> libnvrtc.so.8.0
+lrwxrwxrwx 1 root root    18 Jan 26  2017 /usr/local/cuda/lib64/libnvrtc.so.8.0 -> libnvrtc.so.8.0.61
+-rw-r--r-- 1 root root   18M Jan 26  2017 /usr/local/cuda/lib64/libnvrtc.so.8.0.61
+
+/usr/local/cuda/lib64/stubs:
+total 1.7M
+drwxr-xr-x 2 root root 4.0K Aug 11 16:57 .
+drwxr-xr-x 3 root root 4.0K Aug 11 16:57 ..
+-rw-r--r-- 1 root root  51K Jun  6 19:41 libcublas.so
+-rw-r--r-- 1 root root  40K Jan 26  2017 libcuda.so
+-rw-r--r-- 1 root root  12K Jan 26  2017 libcufft.so
+-rw-r--r-- 1 root root  11K Jan 26  2017 libcufftw.so
+-rw-r--r-- 1 root root 7.5K Jan 26  2017 libcurand.so
+-rw-r--r-- 1 root root  57K Jan 26  2017 libcusolver.so
+-rw-r--r-- 1 root root  82K Jan 26  2017 libcusparse.so
+-rw-r--r-- 1 root root 6.4K Jan 26  2017 libnppc.so
+-rw-r--r-- 1 root root 584K Jan 26  2017 libnppi.so
+-rw-r--r-- 1 root root 101K Jan 26  2017 libnppial.so
+-rw-r--r-- 1 root root  51K Jan 26  2017 libnppicc.so
+-rw-r--r-- 1 root root 7.5K Jan 26  2017 libnppicom.so
+-rw-r--r-- 1 root root  83K Jan 26  2017 libnppidei.so
+-rw-r--r-- 1 root root 108K Jan 26  2017 libnppif.so
+-rw-r--r-- 1 root root  38K Jan 26  2017 libnppig.so
+-rw-r--r-- 1 root root  16K Jan 26  2017 libnppim.so
+-rw-r--r-- 1 root root 187K Jan 26  2017 libnppist.so
+-rw-r--r-- 1 root root 7.7K Jan 26  2017 libnppisu.so
+-rw-r--r-- 1 root root  29K Jan 26  2017 libnppitc.so
+-rw-r--r-- 1 root root 105K Jan 26  2017 libnpps.so
+-rw-r--r-- 1 root root 6.8K Jan 26  2017 libnvgraph.so
+-rw-r--r-- 1 root root  25K Jan 26  2017 libnvidia-ml.so
+-rw-r--r-- 1 root root 5.1K Jan 26  2017 libnvrtc.so
+ ---> 5f03cc8608ee
+Removing intermediate container eaa3f0a7e6dd
+Step 23/31 : RUN mkdir /usr/lib/x86_64-linux-gnu/include/ &&   ln -s /usr/lib/x86_64-linux-gnu/include/cudnn.h /usr/lib/x86_64-linux-gnu/include/cudnn.h &&   ln -s /usr/include/cudnn.h /usr/local/cuda/include/cudnn.h &&   ln -s /usr/lib/x86_64-linux-gnu/libcudnn.so /usr/local/cuda/lib64/libcudnn.so &&   ln -s /usr/lib/x86_64-linux-gnu/libcudnn.so.6 /usr/local/cuda/lib64/libcudnn.so.6
+ ---> Running in 64010ce49a55
+ ---> 657033793637
+Removing intermediate container 64010ce49a55
+Step 24/31 : RUN echo "/usr/local/cuda-8.0/targets/x86_64-linux/lib/stubs" >> /etc/ld.so.conf.d/cuda-8-0.conf
+ ---> Running in d4ee9c44ea79
+ ---> 0febee54d6c8
+Removing intermediate container d4ee9c44ea79
+Step 25/31 : RUN ldconfig
+ ---> Running in a4a4fc75f52e
+ ---> 741f3db0b547
+Removing intermediate container a4a4fc75f52e
+Step 26/31 : RUN git clone https://github.com/tensorflow/magenta.git &&     cd magenta &&     git checkout $MAGENTA_REF
+ ---> Running in 7a6d6d9e3a9b
+[91mCloning into 'magenta'...
+[0m[91mNote: checking out 'v0.3.1'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 93f7c72... Fix linter errors (#848)
+[0m ---> 55e73af6ca20
+Removing intermediate container 7a6d6d9e3a9b
+Step 27/31 : WORKDIR /magenta
+ ---> 4bbeef843e94
+Removing intermediate container f7c1e07f3fcf
+Step 28/31 : RUN sed -ri "/^\W+sha256 = \"[^\"]+\"\W+$/d" WORKSPACE
+ ---> Running in e6e1a6facb59
+ ---> 2e1a776cb072
+Removing intermediate container e6e1a6facb59
+Step 29/31 : RUN bazel build //magenta/... && bazel test --test_output=errors //magenta/...
+ ---> Running in 48e73348f3b2
+[91mINFO: Reading 'startup' options from /etc/bazel.bazelrc: --batch
+[0m[91mWARNING: ignoring http_proxy in environment.
+[0m[91mExtracting Bazel installation...
+[0m[91m____Loading package: magenta/models/pianoroll_rnn_nade[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 24,746 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 95,762 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 247,384 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 555,996 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 946,388 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 1,261,934 bytes
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 1,649,586 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 1,981,376 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 2,287,276 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 2,695,730 bytes
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 2,978,368 bytes
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 3,266,262 bytes
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 3,574,874 bytes[0m[91m
+[0m[91m____Downloading https://github.com/google/protobuf/archive/v3.2.0.tar.gz via codeload.github.com: 3,846,552 bytes[0m[91m
+[0m[91m____Loading package: @bazel_tools//tools/cpp[0m[91m
+[0m[91m____Loading package: @local_config_xcode//
+[0m[91m____Loading package: @local_jdk//[0m[91m
+[0m[91m____Loading package: @local_config_cc//
+[0m[91m____Loading complete.  Analyzing...
+[0m[91m____Loading package: @bazel_tools//tools/zip
+[0m[91m____Loading package: @bazel_tools//tools/launcher[0m[91m
+[0m[91m____Loading package: @bazel_tools//src/tools/launcher[0m[91m
+[0m[91m____Loading package: @bazel_tools//tools/genrule
+[0m[91m____Loading package: @mido//
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 24,660 bytes[0m[91m
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 96,490 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 283,732 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 585,298 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 788,952 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,094,656 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,390,994 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,702,234 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,972,542 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,234,658 bytes[0m[91m
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,535,078 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,865,498 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,174,054 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,520,858 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,782,946 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,043,888 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,318,306 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,608,996 bytes[0m[91m
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,938,158 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 5,250,768 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 5,585,410 bytes
+[0m[91m____Loading package: @pretty_midi//
+[0m[91m____Found 189 targets...
+[0m[91m____Building...
+[0m[91m____[0 / 3] BazelWorkspaceStatusAction stable-status.txt
+[0m[91m____[5 / 39] Writing file external/protobuf/protoc-2.params [for host]
+[0m[91m____[6 / 67] Compiling external/protobuf/src/google/protobuf/extension_set_heavy.cc [for host][0m[91m
+[0m[91m____[95 / 110] Compiling external/protobuf/src/google/protobuf/compiler/java/java_context.cc [for host][0m[91m
+[0m[91m____[174 / 189] Creating source manifest for //magenta/interfaces/midi:magenta_midi[0m[91m
+[0m[91m____[188 / 203] Creating source manifest for //magenta/models/polyphony_rnn:polyphony_rnn_create_dataset[0m[91m
+[0m[91m____[203 / 218] Creating source manifest for //magenta/models/pianoroll_rnn_nade:pianoroll_rnn_nade_create_dataset_test[0m[91m
+[0m[91m____[245 / 260] Creating source manifest for //magenta/models/performance_rnn:performance_encoder_decoder_test
+[0m[91m____[262 / 277] Creating source manifest for //magenta/models/drums_rnn:drums_rnn_generate
+[0m[91m____[308 / 322] Creating runfiles tree bazel-out/local-opt/bin/magenta/scripts/convert_dir_to_note_sequences.runfiles
+[0m[91m____[348 / 364] Compiling external/protobuf/src/google/protobuf/message_lite.cc
+[0m[91m____[461 / 476] Creating source manifest for //magenta/music:musicnet_io_test[0m[91m
+[0m[91m____[469 / 483] Creating runfiles tree bazel-out/local-opt/bin/magenta/music/melody_encoder_decoder_test.runfiles[0m[91m
+[0m[91m____Elapsed time: 56.424s, Critical Path: 11.29s
+[0m[91mINFO: Reading 'startup' options from /etc/bazel.bazelrc: --batch
+WARNING: ignoring http_proxy in environment.
+[0m[91m____Loading package: magenta/interfaces/midi[0m[91m
+[0m[91m____Loading package: @bazel_tools//tools/cpp[0m[91m
+[0m[91m____Loading package: @local_config_xcode//[0m[91m
+[0m[91m____Loading package: @local_jdk//
+[0m[91m____Loading complete.  Analyzing...
+[0m[91m____Loading package: tools/defaults[0m[91m
+[0m[91m____Loading package: @bazel_tools//tools/launcher
+[0m[91m____Loading package: @bazel_tools//src/tools/launcher/util[0m[91m
+[0m[91m____Loading package: @bazel_tools//tools/genrule[0m[91m
+[0m[91m____Loading package: @six_archive//[0m[91m
+[0m[91m____Found 146 targets and 43 test targets...
+[0m[91m____Building...[0m[91m
+[0m[91m____[4 / 19] BazelWorkspaceStatusAction stable-status.txt[0m[91m
+[0m[91m____[510 / 518] Testing //magenta/common:concurrency_test
+[0m[91mPASS: //magenta/music:events_lib_test[0m[91m
+[0m[91mPASS: //magenta/common:state_util_test
+[0m[91mPASS: //magenta/pipelines:statistics_test[0m[91m
+[0m[91mPASS: //magenta/common:beam_search_test[0m[91m
+[0m[91m____[517 / 527] Testing //magenta/music:melody_encoder_decoder_test[0m[91m
+[0m[91mPASS: //magenta/music:chord_symbols_lib_test[0m[91m
+[0m[91mPASS: //magenta/music:drums_encoder_decoder_test
+[0m[91mPASS: //magenta/music:chords_encoder_decoder_test
+[0m[91mPASS: //magenta/music:drums_lib_test[0m[91m
+[0m[91mPASS: //magenta/music:chords_lib_test[0m[91m
+[0m[91mPASS: //magenta/music:encoder_decoder_test[0m[91m
+[0m[91mPASS: //magenta/common:concurrency_test[0m[91m
+[0m[91mPASS: //magenta/music:melodies_lib_test
+[0m[91mPASS: //magenta/music:musicnet_io_test[0m[91m
+[0m[91mPASS: //magenta/music:pianoroll_encoder_decoder_test[0m[91m
+PASS: //magenta/music:melody_encoder_decoder_test
+[0m[91mPASS: //magenta/music:lead_sheets_lib_test[0m[91m
+[0m[91mPASS: //magenta/music:note_sequence_io_test[0m[91m
+[0m[91mPASS: //magenta/music:pianoroll_lib_test
+[0m[91mPASS: //magenta/music:sequences_lib_test
+[0m[91mPASS: //magenta/pipelines:chord_pipelines_test
+[0m[91mPASS: //magenta/scripts:convert_dir_to_note_sequences_test[0m[91m
+[0m[91mPASS: //magenta/pipelines:melody_pipelines_test[0m[91m
+[0m[91mPASS: //magenta/pipelines:dag_pipeline_test[0m[91m
+[0m[91mPASS: //magenta/pipelines:lead_sheet_pipelines_test[0m[91m
+[0m[91mPASS: //magenta/pipelines:drum_pipelines_test
+[0m[91mPASS: //magenta/pipelines:note_sequence_pipelines_test
+[0m[91mPASS: //magenta/music:musicxml_parser_test
+[0m[91mPASS: //magenta/pipelines:pipelines_common_test
+[0m[91m____[541 / 551] Testing //magenta/models/performance_rnn:performance_rnn_create_dataset_test
+[0m[91mPASS: //magenta/pipelines:pipeline_test
+[0m[91mPASS: //magenta/music:sequence_generator_test
+[0m[91mPASS: //magenta/music:midi_io_test
+[0m[91mPASS: //magenta/models/performance_rnn:performance_encoder_decoder_test[0m[91m
+[0m[91mPASS: //magenta/models/performance_rnn:performance_lib_test[0m[91m
+[0m[91mPASS: //magenta/models/melody_rnn:melody_rnn_create_dataset_test[0m[91m
+[0m[91mPASS: //magenta/models/drums_rnn:drums_rnn_create_dataset_test
+[0m[91mPASS: //magenta/models/improv_rnn:improv_rnn_create_dataset_test
+[0m[91mPASS: //magenta/models/polyphony_rnn:polyphony_encoder_decoder_test
+[0m[91mPASS: //magenta/models/polyphony_rnn:polyphony_lib_test
+[0m[91mPASS: //magenta/models/pianoroll_rnn_nade:pianoroll_rnn_nade_create_dataset_test
+[0m[91mPASS: //magenta/models/performance_rnn:performance_rnn_create_dataset_test
+[0m[91mPASS: //magenta/models/shared:events_rnn_graph_test
+[0m[91mPASS: //magenta/models/polyphony_rnn:polyphony_rnn_create_dataset_test
+[0m[91m____[555 / 556] Still waiting for 1 job to complete:
+      Running (local):
+        Testing //magenta/models/rl_tuner:rl_tuner_test, 16 s
+[0m[91mPASS: //magenta/models/rl_tuner:rl_tuner_test
+[0m[91m____Elapsed time: 40.836s, Critical Path: 30.76s
+[0m//magenta/common:beam_search_test                                        PASSED in 1.5s
+//magenta/common:concurrency_test                                        PASSED in 3.1s
+//magenta/common:state_util_test                                         PASSED in 1.5s
+//magenta/models/drums_rnn:drums_rnn_create_dataset_test                 PASSED in 4.1s
+//magenta/models/improv_rnn:improv_rnn_create_dataset_test               PASSED in 4.1s
+//magenta/models/melody_rnn:melody_rnn_create_dataset_test               PASSED in 4.0s
+//magenta/models/performance_rnn:performance_encoder_decoder_test        PASSED in 2.5s
+//magenta/models/performance_rnn:performance_lib_test                    PASSED in 2.4s
+//magenta/models/performance_rnn:performance_rnn_create_dataset_test     PASSED in 4.6s
+//magenta/models/pianoroll_rnn_nade:pianoroll_rnn_nade_create_dataset_test PASSED in 3.7s
+//magenta/models/polyphony_rnn:polyphony_encoder_decoder_test            PASSED in 2.4s
+//magenta/models/polyphony_rnn:polyphony_lib_test                        PASSED in 2.0s
+//magenta/models/polyphony_rnn:polyphony_rnn_create_dataset_test         PASSED in 3.9s
+//magenta/models/rl_tuner:rl_tuner_test                                  PASSED in 30.7s
+//magenta/models/shared:events_rnn_graph_test                            PASSED in 7.6s
+//magenta/music:chord_symbols_lib_test                                   PASSED in 1.6s
+//magenta/music:chords_encoder_decoder_test                              PASSED in 1.9s
+//magenta/music:chords_lib_test                                          PASSED in 2.2s
+//magenta/music:drums_encoder_decoder_test                               PASSED in 1.7s
+//magenta/music:drums_lib_test                                           PASSED in 2.2s
+//magenta/music:encoder_decoder_test                                     PASSED in 1.4s
+//magenta/music:events_lib_test                                          PASSED in 1.4s
+//magenta/music:lead_sheets_lib_test                                     PASSED in 2.2s
+//magenta/music:melodies_lib_test                                        PASSED in 1.8s
+//magenta/music:melody_encoder_decoder_test                              PASSED in 2.1s
+//magenta/music:midi_io_test                                             PASSED in 6.5s
+//magenta/music:musicnet_io_test                                         PASSED in 1.8s
+//magenta/music:musicxml_parser_test                                     PASSED in 4.9s
+//magenta/music:note_sequence_io_test                                    PASSED in 1.6s
+//magenta/music:pianoroll_encoder_decoder_test                           PASSED in 1.5s
+//magenta/music:pianoroll_lib_test                                       PASSED in 1.7s
+//magenta/music:sequence_generator_test                                  PASSED in 1.9s
+//magenta/music:sequences_lib_test                                       PASSED in 1.9s
+//magenta/pipelines:chord_pipelines_test                                 PASSED in 1.6s
+//magenta/pipelines:dag_pipeline_test                                    PASSED in 1.9s
+//magenta/pipelines:drum_pipelines_test                                  PASSED in 2.0s
+//magenta/pipelines:lead_sheet_pipelines_test                            PASSED in 1.9s
+//magenta/pipelines:melody_pipelines_test                                PASSED in 1.8s
+//magenta/pipelines:note_sequence_pipelines_test                         PASSED in 1.8s
+//magenta/pipelines:pipeline_test                                        PASSED in 2.2s
+//magenta/pipelines:pipelines_common_test                                PASSED in 1.7s
+//magenta/pipelines:statistics_test                                      PASSED in 1.5s
+//magenta/scripts:convert_dir_to_note_sequences_test                     PASSED in 2.0s
+
+Executed 43 out of 43 tests: 43 tests pass.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.
+ ---> 55d66246a85e
+Removing intermediate container 48e73348f3b2
+Step 30/31 : RUN bazel build magenta/tools/pip:build_pip_package &&     bazel-bin/magenta/tools/pip/build_pip_package /tmp/magenta_pkg &&     bazel-bin/magenta/tools/pip/build_pip_package /tmp/magenta_pkg --gpu     pip install --upgrade /tmp/magenta_pkg/magenta-*.whl
+ ---> Running in 70e0cb8cb691
+[91mINFO: Reading 'startup' options from /etc/bazel.bazelrc: --batch
+[0m[91mWARNING: ignoring http_proxy in environment.
+[0m[91m____Loading package: magenta/tools/pip
+[0m[91m____Loading package: @bazel_tools//tools/cpp
+[0m[91m____Loading package: @local_config_xcode//[0m[91m
+[0m[91m____Loading package: @local_jdk//[0m[91m
+[0m[91m____Loading package: @local_config_cc//
+[0m[91m____Loading complete.  Analyzing...
+[0m[91m____Loading package: magenta
+[0m[91m____Loading package: @bazel_tools//tools/zip
+[0m[91m____Loading package: @bazel_tools//src/tools/launcher
+[0m[91m____Loading package: @protobuf//
+[0m[91m____Loading package: @bazel_tools//tools/genrule
+[0m[91m____Loading package: @six_archive//
+[0m[91m____Downloading https://github.com/olemb/mido/archive/1.2.6.tar.gz via codeload.github.com: 13,700 bytes
+[0m[91m____Downloading https://github.com/olemb/mido/archive/1.2.6.tar.gz via codeload.github.com: 41,272 bytes
+[0m[91m____Loading package: @mido//
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 207,460 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 457,218 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 759,036 bytes[0m[91m
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,032,084 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,302,392 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,571,610 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 1,869,318 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,112,226 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,418,154 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 2,711,752 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,003,924 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,283,822 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,552,760 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 3,860,058 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,127,626 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,388,344 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,660,022 bytes[0m[91m
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 4,971,430 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 5,255,438 bytes
+[0m[91m____Downloading https://github.com/craffel/pretty-midi/archive/0.2.8.tar.gz via codeload.github.com: 5,563,882 bytes
+[0m[91m____Loading package: @pretty_midi//
+[0m[91m____Found 1 target...
+[0m[91m____Building...
+[0m[91m____[1 / 7] BazelWorkspaceStatusAction stable-status.txt[0m[91m
+[0m[91m____Building complete.
+[0m[91mTarget //magenta/tools/pip:build_pip_package up-to-date:
+[0m[91m  bazel-bin/magenta/tools/pip/build_pip_package
+[0m[91m____Elapsed time: 10.280s, Critical Path: 0.07s
+[0mSun Oct 1 13:55:40 UTC 2017 : === Using tmpdir: /tmp/tmp.MxuYKkNDKu
+/tmp/tmp.MxuYKkNDKu /magenta
+Sun Oct 1 13:55:41 UTC 2017 : === Building wheel
+running bdist_wheel
+running build
+running build_py
+creating build
+creating build/lib.linux-x86_64-2.7
+creating build/lib.linux-x86_64-2.7/magenta
+copying magenta/__init__.py -> build/lib.linux-x86_64-2.7/magenta
+copying magenta/version.py -> build/lib.linux-x86_64-2.7/magenta
+creating build/lib.linux-x86_64-2.7/magenta/interfaces
+copying magenta/interfaces/__init__.py -> build/lib.linux-x86_64-2.7/magenta/interfaces
+creating build/lib.linux-x86_64-2.7/magenta/models
+copying magenta/models/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models
+creating build/lib.linux-x86_64-2.7/magenta/scripts
+copying magenta/scripts/__init__.py -> build/lib.linux-x86_64-2.7/magenta/scripts
+copying magenta/scripts/convert_dir_to_note_sequences.py -> build/lib.linux-x86_64-2.7/magenta/scripts
+creating build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/drums_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/__init__.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/musicxml_parser.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/melody_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chords_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chords_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/drums_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/melodies_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/notebook_utils.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chord_symbols_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/note_sequence_io.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequence_generator_bundle.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/pianoroll_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/constants.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/events_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/midi_io.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/pianoroll_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/lead_sheets_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/model.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/midi_synth.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequences_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/musicxml_reader.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/testing_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+creating build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/__init__.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/music_pb2.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/generator_pb2.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+creating build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/__init__.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/state_util.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/sequence_example_lib.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/concurrency.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/beam_search.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/testing_lib.py -> build/lib.linux-x86_64-2.7/magenta/common
+creating build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/melody_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/lead_sheet_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/__init__.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/note_sequence_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/statistics.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/drum_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/pipeline.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/dag_pipeline.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/pipelines_common.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+creating build/lib.linux-x86_64-2.7/magenta/tools
+copying magenta/tools/__init__.py -> build/lib.linux-x86_64-2.7/magenta/tools
+creating build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/__init__.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/magenta_midi.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_interaction.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_hub.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_clock.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+creating build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_lib.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_model.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/utils.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/reader.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+creating build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/imagenet_data.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/learning.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_utils.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_finetune.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/vgg.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_evaluate.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/ops.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/model.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_train.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_transform.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+creating build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_ops.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_train.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_eval_metrics.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/note_rnn_loader.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+creating build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+creating build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_graph.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+creating build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/utils.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/sketch_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/model.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/rnn.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_model.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_lib.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/fastgen.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/h512_bo16.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/nsynth_save_embeddings.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/nsynth_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/masked.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+creating build/lib.linux-x86_64-2.7/magenta/tools/pip
+copying magenta/tools/pip/__init__.py -> build/lib.linux-x86_64-2.7/magenta/tools/pip
+copying magenta/tools/pip/setup.py -> build/lib.linux-x86_64-2.7/magenta/tools/pip
+running egg_info
+creating magenta.egg-info
+writing requirements to magenta.egg-info/requires.txt
+writing magenta.egg-info/PKG-INFO
+writing top-level names to magenta.egg-info/top_level.txt
+writing dependency_links to magenta.egg-info/dependency_links.txt
+writing entry points to magenta.egg-info/entry_points.txt
+writing manifest file 'magenta.egg-info/SOURCES.txt'
+reading manifest file 'magenta.egg-info/SOURCES.txt'
+writing manifest file 'magenta.egg-info/SOURCES.txt'
+creating build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/picabo_lava.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/doug_eck.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/magenta
+copying build/lib.linux-x86_64-2.7/magenta/__init__.py -> build/bdist.linux-x86_64/wheel/magenta
+creating build/bdist.linux-x86_64/wheel/magenta/interfaces
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces
+creating build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/magenta_midi.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_interaction.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_hub.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_clock.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+creating build/bdist.linux-x86_64/wheel/magenta/models
+copying build/lib.linux-x86_64-2.7/magenta/models/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models
+creating build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_lib.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+creating build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/fastgen.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/h512_bo16.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/nsynth_save_embeddings.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/nsynth_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/masked.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/reader.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+creating build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/imagenet_data.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/learning.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_finetune.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/vgg.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_evaluate.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/ops.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+creating build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/picabo_lava.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/doug_eck.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/model.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_transform.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+creating build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_ops.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_eval_metrics.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/note_rnn_loader.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+creating build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+creating build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_graph.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+creating build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/sketch_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/model.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/rnn.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_lib.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/version.py -> build/bdist.linux-x86_64/wheel/magenta
+creating build/bdist.linux-x86_64/wheel/magenta/scripts
+copying build/lib.linux-x86_64-2.7/magenta/scripts/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/scripts
+copying build/lib.linux-x86_64-2.7/magenta/scripts/convert_dir_to_note_sequences.py -> build/bdist.linux-x86_64/wheel/magenta/scripts
+creating build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/drums_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/musicxml_parser.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/melody_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chords_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chords_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/drums_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/melodies_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/notebook_utils.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chord_symbols_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/note_sequence_io.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequence_generator_bundle.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/pianoroll_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/constants.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/events_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/midi_io.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/pianoroll_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/lead_sheets_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/model.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/midi_synth.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequences_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/musicxml_reader.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/testing_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+creating build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/music_pb2.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/generator_pb2.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+creating build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/state_util.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/sequence_example_lib.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/concurrency.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/beam_search.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/testing_lib.py -> build/bdist.linux-x86_64/wheel/magenta/common
+creating build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/melody_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/lead_sheet_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/note_sequence_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/statistics.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/drum_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/pipeline.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/dag_pipeline.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/pipelines_common.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+creating build/bdist.linux-x86_64/wheel/magenta/tools
+copying build/lib.linux-x86_64-2.7/magenta/tools/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/tools
+creating build/bdist.linux-x86_64/wheel/magenta/tools/pip
+copying build/lib.linux-x86_64-2.7/magenta/tools/pip/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/tools/pip
+copying build/lib.linux-x86_64-2.7/magenta/tools/pip/setup.py -> build/bdist.linux-x86_64/wheel/magenta/tools/pip
+running install_egg_info
+Copying magenta.egg-info to build/bdist.linux-x86_64/wheel/magenta-0.3.1-py2.7.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/magenta-0.3.1.dist-info/WHEEL
+creating '/tmp/tmp.MxuYKkNDKu/dist/magenta-0.3.1-py2.py3-none-any.whl' and adding '.' to it
+adding 'magenta/__init__.py'
+adding 'magenta/version.py'
+adding 'magenta/common/__init__.py'
+adding 'magenta/common/beam_search.py'
+adding 'magenta/common/concurrency.py'
+adding 'magenta/common/sequence_example_lib.py'
+adding 'magenta/common/state_util.py'
+adding 'magenta/common/testing_lib.py'
+adding 'magenta/interfaces/__init__.py'
+adding 'magenta/interfaces/midi/__init__.py'
+adding 'magenta/interfaces/midi/magenta_midi.py'
+adding 'magenta/interfaces/midi/midi_clock.py'
+adding 'magenta/interfaces/midi/midi_hub.py'
+adding 'magenta/interfaces/midi/midi_interaction.py'
+adding 'magenta/models/__init__.py'
+adding 'magenta/models/drums_rnn/__init__.py'
+adding 'magenta/models/drums_rnn/drums_rnn_config_flags.py'
+adding 'magenta/models/drums_rnn/drums_rnn_create_dataset.py'
+adding 'magenta/models/drums_rnn/drums_rnn_generate.py'
+adding 'magenta/models/drums_rnn/drums_rnn_model.py'
+adding 'magenta/models/drums_rnn/drums_rnn_sequence_generator.py'
+adding 'magenta/models/drums_rnn/drums_rnn_train.py'
+adding 'magenta/models/image_stylization/__init__.py'
+adding 'magenta/models/image_stylization/image_stylization_create_dataset.py'
+adding 'magenta/models/image_stylization/image_stylization_evaluate.py'
+adding 'magenta/models/image_stylization/image_stylization_finetune.py'
+adding 'magenta/models/image_stylization/image_stylization_train.py'
+adding 'magenta/models/image_stylization/image_stylization_transform.py'
+adding 'magenta/models/image_stylization/image_utils.py'
+adding 'magenta/models/image_stylization/imagenet_data.py'
+adding 'magenta/models/image_stylization/learning.py'
+adding 'magenta/models/image_stylization/model.py'
+adding 'magenta/models/image_stylization/ops.py'
+adding 'magenta/models/image_stylization/vgg.py'
+adding 'magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/doug_eck.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/picabo_lava.jpg'
+adding 'magenta/models/improv_rnn/__init__.py'
+adding 'magenta/models/improv_rnn/improv_rnn_config_flags.py'
+adding 'magenta/models/improv_rnn/improv_rnn_create_dataset.py'
+adding 'magenta/models/improv_rnn/improv_rnn_generate.py'
+adding 'magenta/models/improv_rnn/improv_rnn_model.py'
+adding 'magenta/models/improv_rnn/improv_rnn_sequence_generator.py'
+adding 'magenta/models/improv_rnn/improv_rnn_train.py'
+adding 'magenta/models/melody_rnn/__init__.py'
+adding 'magenta/models/melody_rnn/melody_rnn_config_flags.py'
+adding 'magenta/models/melody_rnn/melody_rnn_create_dataset.py'
+adding 'magenta/models/melody_rnn/melody_rnn_generate.py'
+adding 'magenta/models/melody_rnn/melody_rnn_model.py'
+adding 'magenta/models/melody_rnn/melody_rnn_sequence_generator.py'
+adding 'magenta/models/melody_rnn/melody_rnn_train.py'
+adding 'magenta/models/nsynth/__init__.py'
+adding 'magenta/models/nsynth/reader.py'
+adding 'magenta/models/nsynth/utils.py'
+adding 'magenta/models/nsynth/wavenet/__init__.py'
+adding 'magenta/models/nsynth/wavenet/fastgen.py'
+adding 'magenta/models/nsynth/wavenet/h512_bo16.py'
+adding 'magenta/models/nsynth/wavenet/masked.py'
+adding 'magenta/models/nsynth/wavenet/nsynth_generate.py'
+adding 'magenta/models/nsynth/wavenet/nsynth_save_embeddings.py'
+adding 'magenta/models/performance_rnn/__init__.py'
+adding 'magenta/models/performance_rnn/performance_encoder_decoder.py'
+adding 'magenta/models/performance_rnn/performance_lib.py'
+adding 'magenta/models/performance_rnn/performance_model.py'
+adding 'magenta/models/performance_rnn/performance_rnn_create_dataset.py'
+adding 'magenta/models/performance_rnn/performance_rnn_generate.py'
+adding 'magenta/models/performance_rnn/performance_rnn_train.py'
+adding 'magenta/models/performance_rnn/performance_sequence_generator.py'
+adding 'magenta/models/pianoroll_rnn_nade/__init__.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py'
+adding 'magenta/models/polyphony_rnn/__init__.py'
+adding 'magenta/models/polyphony_rnn/polyphony_encoder_decoder.py'
+adding 'magenta/models/polyphony_rnn/polyphony_lib.py'
+adding 'magenta/models/polyphony_rnn/polyphony_model.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_generate.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_train.py'
+adding 'magenta/models/polyphony_rnn/polyphony_sequence_generator.py'
+adding 'magenta/models/rl_tuner/__init__.py'
+adding 'magenta/models/rl_tuner/note_rnn_loader.py'
+adding 'magenta/models/rl_tuner/rl_tuner.py'
+adding 'magenta/models/rl_tuner/rl_tuner_eval_metrics.py'
+adding 'magenta/models/rl_tuner/rl_tuner_ops.py'
+adding 'magenta/models/rl_tuner/rl_tuner_train.py'
+adding 'magenta/models/shared/__init__.py'
+adding 'magenta/models/shared/events_rnn_graph.py'
+adding 'magenta/models/shared/events_rnn_model.py'
+adding 'magenta/models/shared/events_rnn_train.py'
+adding 'magenta/models/sketch_rnn/__init__.py'
+adding 'magenta/models/sketch_rnn/model.py'
+adding 'magenta/models/sketch_rnn/rnn.py'
+adding 'magenta/models/sketch_rnn/sketch_rnn_train.py'
+adding 'magenta/models/sketch_rnn/utils.py'
+adding 'magenta/music/__init__.py'
+adding 'magenta/music/chord_symbols_lib.py'
+adding 'magenta/music/chords_encoder_decoder.py'
+adding 'magenta/music/chords_lib.py'
+adding 'magenta/music/constants.py'
+adding 'magenta/music/drums_encoder_decoder.py'
+adding 'magenta/music/drums_lib.py'
+adding 'magenta/music/encoder_decoder.py'
+adding 'magenta/music/events_lib.py'
+adding 'magenta/music/lead_sheets_lib.py'
+adding 'magenta/music/melodies_lib.py'
+adding 'magenta/music/melody_encoder_decoder.py'
+adding 'magenta/music/midi_io.py'
+adding 'magenta/music/midi_synth.py'
+adding 'magenta/music/model.py'
+adding 'magenta/music/musicxml_parser.py'
+adding 'magenta/music/musicxml_reader.py'
+adding 'magenta/music/note_sequence_io.py'
+adding 'magenta/music/notebook_utils.py'
+adding 'magenta/music/pianoroll_encoder_decoder.py'
+adding 'magenta/music/pianoroll_lib.py'
+adding 'magenta/music/sequence_generator.py'
+adding 'magenta/music/sequence_generator_bundle.py'
+adding 'magenta/music/sequences_lib.py'
+adding 'magenta/music/testing_lib.py'
+adding 'magenta/pipelines/__init__.py'
+adding 'magenta/pipelines/dag_pipeline.py'
+adding 'magenta/pipelines/drum_pipelines.py'
+adding 'magenta/pipelines/lead_sheet_pipelines.py'
+adding 'magenta/pipelines/melody_pipelines.py'
+adding 'magenta/pipelines/note_sequence_pipelines.py'
+adding 'magenta/pipelines/pipeline.py'
+adding 'magenta/pipelines/pipelines_common.py'
+adding 'magenta/pipelines/statistics.py'
+adding 'magenta/protobuf/__init__.py'
+adding 'magenta/protobuf/generator_pb2.py'
+adding 'magenta/protobuf/music_pb2.py'
+adding 'magenta/scripts/__init__.py'
+adding 'magenta/scripts/convert_dir_to_note_sequences.py'
+adding 'magenta/tools/__init__.py'
+adding 'magenta/tools/pip/__init__.py'
+adding 'magenta/tools/pip/setup.py'
+adding 'magenta-0.3.1.dist-info/DESCRIPTION.rst'
+adding 'magenta-0.3.1.dist-info/entry_points.txt'
+adding 'magenta-0.3.1.dist-info/metadata.json'
+adding 'magenta-0.3.1.dist-info/top_level.txt'
+adding 'magenta-0.3.1.dist-info/WHEEL'
+adding 'magenta-0.3.1.dist-info/METADATA'
+adding 'magenta-0.3.1.dist-info/RECORD'
+/magenta
+Sun Oct 1 13:55:41 UTC 2017 : === Output wheel file is in: /tmp/magenta_pkg
+Sun Oct 1 13:55:41 UTC 2017 : === Using tmpdir: /tmp/tmp.3dzw5bnDI2
+/tmp/tmp.3dzw5bnDI2 /magenta
+Sun Oct 1 13:55:41 UTC 2017 : === Building wheel
+running bdist_wheel
+running build
+running build_py
+creating build
+creating build/lib.linux-x86_64-2.7
+creating build/lib.linux-x86_64-2.7/magenta
+copying magenta/__init__.py -> build/lib.linux-x86_64-2.7/magenta
+copying magenta/version.py -> build/lib.linux-x86_64-2.7/magenta
+creating build/lib.linux-x86_64-2.7/magenta/interfaces
+copying magenta/interfaces/__init__.py -> build/lib.linux-x86_64-2.7/magenta/interfaces
+creating build/lib.linux-x86_64-2.7/magenta/models
+copying magenta/models/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models
+creating build/lib.linux-x86_64-2.7/magenta/scripts
+copying magenta/scripts/__init__.py -> build/lib.linux-x86_64-2.7/magenta/scripts
+copying magenta/scripts/convert_dir_to_note_sequences.py -> build/lib.linux-x86_64-2.7/magenta/scripts
+creating build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/drums_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/__init__.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/musicxml_parser.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/melody_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chords_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chords_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/drums_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/melodies_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/notebook_utils.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/chord_symbols_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/note_sequence_io.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequence_generator_bundle.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/pianoroll_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/constants.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/events_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/midi_io.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/pianoroll_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/lead_sheets_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/model.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/midi_synth.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/sequences_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/musicxml_reader.py -> build/lib.linux-x86_64-2.7/magenta/music
+copying magenta/music/testing_lib.py -> build/lib.linux-x86_64-2.7/magenta/music
+creating build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/__init__.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/music_pb2.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+copying magenta/protobuf/generator_pb2.py -> build/lib.linux-x86_64-2.7/magenta/protobuf
+creating build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/__init__.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/state_util.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/sequence_example_lib.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/concurrency.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/beam_search.py -> build/lib.linux-x86_64-2.7/magenta/common
+copying magenta/common/testing_lib.py -> build/lib.linux-x86_64-2.7/magenta/common
+creating build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/melody_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/lead_sheet_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/__init__.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/note_sequence_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/statistics.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/drum_pipelines.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/pipeline.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/dag_pipeline.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+copying magenta/pipelines/pipelines_common.py -> build/lib.linux-x86_64-2.7/magenta/pipelines
+creating build/lib.linux-x86_64-2.7/magenta/tools
+copying magenta/tools/__init__.py -> build/lib.linux-x86_64-2.7/magenta/tools
+creating build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/__init__.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/magenta_midi.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_interaction.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_hub.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+copying magenta/interfaces/midi/midi_clock.py -> build/lib.linux-x86_64-2.7/magenta/interfaces/midi
+creating build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+copying magenta/models/melody_rnn/melody_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/melody_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+copying magenta/models/improv_rnn/improv_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/improv_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_lib.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_model.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+copying magenta/models/performance_rnn/performance_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/performance_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/utils.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+copying magenta/models/nsynth/reader.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth
+creating build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/imagenet_data.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/learning.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_utils.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_finetune.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/vgg.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_evaluate.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/ops.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/model.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_train.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+copying magenta/models/image_stylization/image_stylization_transform.py -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization
+creating build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_ops.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_train.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/rl_tuner_eval_metrics.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+copying magenta/models/rl_tuner/note_rnn_loader.py -> build/lib.linux-x86_64-2.7/magenta/models/rl_tuner
+creating build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+copying magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py -> build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade
+creating build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+copying magenta/models/shared/events_rnn_graph.py -> build/lib.linux-x86_64-2.7/magenta/models/shared
+creating build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/utils.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/sketch_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/model.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+copying magenta/models/sketch_rnn/rnn.py -> build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_model.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_lib.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_encoder_decoder.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+copying magenta/models/polyphony_rnn/polyphony_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_train.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_sequence_generator.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_create_dataset.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_model.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+copying magenta/models/drums_rnn/drums_rnn_config_flags.py -> build/lib.linux-x86_64-2.7/magenta/models/drums_rnn
+creating build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/fastgen.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/__init__.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/h512_bo16.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/nsynth_save_embeddings.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/nsynth_generate.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+copying magenta/models/nsynth/wavenet/masked.py -> build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet
+creating build/lib.linux-x86_64-2.7/magenta/tools/pip
+copying magenta/tools/pip/__init__.py -> build/lib.linux-x86_64-2.7/magenta/tools/pip
+copying magenta/tools/pip/setup.py -> build/lib.linux-x86_64-2.7/magenta/tools/pip
+running egg_info
+creating magenta_gpu.egg-info
+writing requirements to magenta_gpu.egg-info/requires.txt
+writing magenta_gpu.egg-info/PKG-INFO
+writing top-level names to magenta_gpu.egg-info/top_level.txt
+writing dependency_links to magenta_gpu.egg-info/dependency_links.txt
+writing entry points to magenta_gpu.egg-info/entry_points.txt
+writing manifest file 'magenta_gpu.egg-info/SOURCES.txt'
+reading manifest file 'magenta_gpu.egg-info/SOURCES.txt'
+writing manifest file 'magenta_gpu.egg-info/SOURCES.txt'
+creating build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/picabo_lava.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+copying magenta/models/image_stylization/evaluation_images/doug_eck.jpg -> build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/magenta
+copying build/lib.linux-x86_64-2.7/magenta/__init__.py -> build/bdist.linux-x86_64/wheel/magenta
+creating build/bdist.linux-x86_64/wheel/magenta/interfaces
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces
+creating build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/magenta_midi.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_interaction.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_hub.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+copying build/lib.linux-x86_64-2.7/magenta/interfaces/midi/midi_clock.py -> build/bdist.linux-x86_64/wheel/magenta/interfaces/midi
+creating build/bdist.linux-x86_64/wheel/magenta/models
+copying build/lib.linux-x86_64-2.7/magenta/models/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models
+creating build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/melody_rnn/melody_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/melody_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/improv_rnn/improv_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/improv_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_lib.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/performance_rnn/performance_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/performance_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+creating build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/fastgen.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/h512_bo16.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/nsynth_save_embeddings.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/nsynth_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/wavenet/masked.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth/wavenet
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+copying build/lib.linux-x86_64-2.7/magenta/models/nsynth/reader.py -> build/bdist.linux-x86_64/wheel/magenta/models/nsynth
+creating build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/imagenet_data.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/learning.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_finetune.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/vgg.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_evaluate.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/ops.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+creating build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/picabo_lava.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/evaluation_images/doug_eck.jpg -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization/evaluation_images
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/model.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+copying build/lib.linux-x86_64-2.7/magenta/models/image_stylization/image_stylization_transform.py -> build/bdist.linux-x86_64/wheel/magenta/models/image_stylization
+creating build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_ops.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/rl_tuner_eval_metrics.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+copying build/lib.linux-x86_64-2.7/magenta/models/rl_tuner/note_rnn_loader.py -> build/bdist.linux-x86_64/wheel/magenta/models/rl_tuner
+creating build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+copying build/lib.linux-x86_64-2.7/magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/pianoroll_rnn_nade
+creating build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+copying build/lib.linux-x86_64-2.7/magenta/models/shared/events_rnn_graph.py -> build/bdist.linux-x86_64/wheel/magenta/models/shared
+creating build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/utils.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/sketch_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/model.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/sketch_rnn/rnn.py -> build/bdist.linux-x86_64/wheel/magenta/models/sketch_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_lib.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/polyphony_rnn/polyphony_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/polyphony_rnn
+creating build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_train.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_create_dataset.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_generate.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_model.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/models/drums_rnn/drums_rnn_config_flags.py -> build/bdist.linux-x86_64/wheel/magenta/models/drums_rnn
+copying build/lib.linux-x86_64-2.7/magenta/version.py -> build/bdist.linux-x86_64/wheel/magenta
+creating build/bdist.linux-x86_64/wheel/magenta/scripts
+copying build/lib.linux-x86_64-2.7/magenta/scripts/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/scripts
+copying build/lib.linux-x86_64-2.7/magenta/scripts/convert_dir_to_note_sequences.py -> build/bdist.linux-x86_64/wheel/magenta/scripts
+creating build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/drums_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/musicxml_parser.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/melody_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chords_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chords_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/drums_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/melodies_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/notebook_utils.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/chord_symbols_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/note_sequence_io.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequence_generator_bundle.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequence_generator.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/pianoroll_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/constants.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/events_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/midi_io.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/pianoroll_encoder_decoder.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/lead_sheets_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/model.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/midi_synth.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/sequences_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/musicxml_reader.py -> build/bdist.linux-x86_64/wheel/magenta/music
+copying build/lib.linux-x86_64-2.7/magenta/music/testing_lib.py -> build/bdist.linux-x86_64/wheel/magenta/music
+creating build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/music_pb2.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+copying build/lib.linux-x86_64-2.7/magenta/protobuf/generator_pb2.py -> build/bdist.linux-x86_64/wheel/magenta/protobuf
+creating build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/state_util.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/sequence_example_lib.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/concurrency.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/beam_search.py -> build/bdist.linux-x86_64/wheel/magenta/common
+copying build/lib.linux-x86_64-2.7/magenta/common/testing_lib.py -> build/bdist.linux-x86_64/wheel/magenta/common
+creating build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/melody_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/lead_sheet_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/note_sequence_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/statistics.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/drum_pipelines.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/pipeline.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/dag_pipeline.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+copying build/lib.linux-x86_64-2.7/magenta/pipelines/pipelines_common.py -> build/bdist.linux-x86_64/wheel/magenta/pipelines
+creating build/bdist.linux-x86_64/wheel/magenta/tools
+copying build/lib.linux-x86_64-2.7/magenta/tools/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/tools
+creating build/bdist.linux-x86_64/wheel/magenta/tools/pip
+copying build/lib.linux-x86_64-2.7/magenta/tools/pip/__init__.py -> build/bdist.linux-x86_64/wheel/magenta/tools/pip
+copying build/lib.linux-x86_64-2.7/magenta/tools/pip/setup.py -> build/bdist.linux-x86_64/wheel/magenta/tools/pip
+running install_egg_info
+Copying magenta_gpu.egg-info to build/bdist.linux-x86_64/wheel/magenta_gpu-0.3.1-py2.7.egg-info
+running install_scripts
+creating build/bdist.linux-x86_64/wheel/magenta_gpu-0.3.1.dist-info/WHEEL
+creating '/tmp/tmp.3dzw5bnDI2/dist/magenta_gpu-0.3.1-py2.py3-none-any.whl' and adding '.' to it
+adding 'magenta/__init__.py'
+adding 'magenta/version.py'
+adding 'magenta/common/__init__.py'
+adding 'magenta/common/beam_search.py'
+adding 'magenta/common/concurrency.py'
+adding 'magenta/common/sequence_example_lib.py'
+adding 'magenta/common/state_util.py'
+adding 'magenta/common/testing_lib.py'
+adding 'magenta/interfaces/__init__.py'
+adding 'magenta/interfaces/midi/__init__.py'
+adding 'magenta/interfaces/midi/magenta_midi.py'
+adding 'magenta/interfaces/midi/midi_clock.py'
+adding 'magenta/interfaces/midi/midi_hub.py'
+adding 'magenta/interfaces/midi/midi_interaction.py'
+adding 'magenta/models/__init__.py'
+adding 'magenta/models/drums_rnn/__init__.py'
+adding 'magenta/models/drums_rnn/drums_rnn_config_flags.py'
+adding 'magenta/models/drums_rnn/drums_rnn_create_dataset.py'
+adding 'magenta/models/drums_rnn/drums_rnn_generate.py'
+adding 'magenta/models/drums_rnn/drums_rnn_model.py'
+adding 'magenta/models/drums_rnn/drums_rnn_sequence_generator.py'
+adding 'magenta/models/drums_rnn/drums_rnn_train.py'
+adding 'magenta/models/image_stylization/__init__.py'
+adding 'magenta/models/image_stylization/image_stylization_create_dataset.py'
+adding 'magenta/models/image_stylization/image_stylization_evaluate.py'
+adding 'magenta/models/image_stylization/image_stylization_finetune.py'
+adding 'magenta/models/image_stylization/image_stylization_train.py'
+adding 'magenta/models/image_stylization/image_stylization_transform.py'
+adding 'magenta/models/image_stylization/image_utils.py'
+adding 'magenta/models/image_stylization/imagenet_data.py'
+adding 'magenta/models/image_stylization/learning.py'
+adding 'magenta/models/image_stylization/model.py'
+adding 'magenta/models/image_stylization/ops.py'
+adding 'magenta/models/image_stylization/vgg.py'
+adding 'magenta/models/image_stylization/evaluation_images/benjamin_harrison.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/coast_guard_boat.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/doug_eck.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/guerrillero_heroico.jpg'
+adding 'magenta/models/image_stylization/evaluation_images/picabo_lava.jpg'
+adding 'magenta/models/improv_rnn/__init__.py'
+adding 'magenta/models/improv_rnn/improv_rnn_config_flags.py'
+adding 'magenta/models/improv_rnn/improv_rnn_create_dataset.py'
+adding 'magenta/models/improv_rnn/improv_rnn_generate.py'
+adding 'magenta/models/improv_rnn/improv_rnn_model.py'
+adding 'magenta/models/improv_rnn/improv_rnn_sequence_generator.py'
+adding 'magenta/models/improv_rnn/improv_rnn_train.py'
+adding 'magenta/models/melody_rnn/__init__.py'
+adding 'magenta/models/melody_rnn/melody_rnn_config_flags.py'
+adding 'magenta/models/melody_rnn/melody_rnn_create_dataset.py'
+adding 'magenta/models/melody_rnn/melody_rnn_generate.py'
+adding 'magenta/models/melody_rnn/melody_rnn_model.py'
+adding 'magenta/models/melody_rnn/melody_rnn_sequence_generator.py'
+adding 'magenta/models/melody_rnn/melody_rnn_train.py'
+adding 'magenta/models/nsynth/__init__.py'
+adding 'magenta/models/nsynth/reader.py'
+adding 'magenta/models/nsynth/utils.py'
+adding 'magenta/models/nsynth/wavenet/__init__.py'
+adding 'magenta/models/nsynth/wavenet/fastgen.py'
+adding 'magenta/models/nsynth/wavenet/h512_bo16.py'
+adding 'magenta/models/nsynth/wavenet/masked.py'
+adding 'magenta/models/nsynth/wavenet/nsynth_generate.py'
+adding 'magenta/models/nsynth/wavenet/nsynth_save_embeddings.py'
+adding 'magenta/models/performance_rnn/__init__.py'
+adding 'magenta/models/performance_rnn/performance_encoder_decoder.py'
+adding 'magenta/models/performance_rnn/performance_lib.py'
+adding 'magenta/models/performance_rnn/performance_model.py'
+adding 'magenta/models/performance_rnn/performance_rnn_create_dataset.py'
+adding 'magenta/models/performance_rnn/performance_rnn_generate.py'
+adding 'magenta/models/performance_rnn/performance_rnn_train.py'
+adding 'magenta/models/performance_rnn/performance_sequence_generator.py'
+adding 'magenta/models/pianoroll_rnn_nade/__init__.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_create_dataset.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_generate.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_graph.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_model.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_sequence_generator.py'
+adding 'magenta/models/pianoroll_rnn_nade/pianoroll_rnn_nade_train.py'
+adding 'magenta/models/polyphony_rnn/__init__.py'
+adding 'magenta/models/polyphony_rnn/polyphony_encoder_decoder.py'
+adding 'magenta/models/polyphony_rnn/polyphony_lib.py'
+adding 'magenta/models/polyphony_rnn/polyphony_model.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_create_dataset.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_generate.py'
+adding 'magenta/models/polyphony_rnn/polyphony_rnn_train.py'
+adding 'magenta/models/polyphony_rnn/polyphony_sequence_generator.py'
+adding 'magenta/models/rl_tuner/__init__.py'
+adding 'magenta/models/rl_tuner/note_rnn_loader.py'
+adding 'magenta/models/rl_tuner/rl_tuner.py'
+adding 'magenta/models/rl_tuner/rl_tuner_eval_metrics.py'
+adding 'magenta/models/rl_tuner/rl_tuner_ops.py'
+adding 'magenta/models/rl_tuner/rl_tuner_train.py'
+adding 'magenta/models/shared/__init__.py'
+adding 'magenta/models/shared/events_rnn_graph.py'
+adding 'magenta/models/shared/events_rnn_model.py'
+adding 'magenta/models/shared/events_rnn_train.py'
+adding 'magenta/models/sketch_rnn/__init__.py'
+adding 'magenta/models/sketch_rnn/model.py'
+adding 'magenta/models/sketch_rnn/rnn.py'
+adding 'magenta/models/sketch_rnn/sketch_rnn_train.py'
+adding 'magenta/models/sketch_rnn/utils.py'
+adding 'magenta/music/__init__.py'
+adding 'magenta/music/chord_symbols_lib.py'
+adding 'magenta/music/chords_encoder_decoder.py'
+adding 'magenta/music/chords_lib.py'
+adding 'magenta/music/constants.py'
+adding 'magenta/music/drums_encoder_decoder.py'
+adding 'magenta/music/drums_lib.py'
+adding 'magenta/music/encoder_decoder.py'
+adding 'magenta/music/events_lib.py'
+adding 'magenta/music/lead_sheets_lib.py'
+adding 'magenta/music/melodies_lib.py'
+adding 'magenta/music/melody_encoder_decoder.py'
+adding 'magenta/music/midi_io.py'
+adding 'magenta/music/midi_synth.py'
+adding 'magenta/music/model.py'
+adding 'magenta/music/musicxml_parser.py'
+adding 'magenta/music/musicxml_reader.py'
+adding 'magenta/music/note_sequence_io.py'
+adding 'magenta/music/notebook_utils.py'
+adding 'magenta/music/pianoroll_encoder_decoder.py'
+adding 'magenta/music/pianoroll_lib.py'
+adding 'magenta/music/sequence_generator.py'
+adding 'magenta/music/sequence_generator_bundle.py'
+adding 'magenta/music/sequences_lib.py'
+adding 'magenta/music/testing_lib.py'
+adding 'magenta/pipelines/__init__.py'
+adding 'magenta/pipelines/dag_pipeline.py'
+adding 'magenta/pipelines/drum_pipelines.py'
+adding 'magenta/pipelines/lead_sheet_pipelines.py'
+adding 'magenta/pipelines/melody_pipelines.py'
+adding 'magenta/pipelines/note_sequence_pipelines.py'
+adding 'magenta/pipelines/pipeline.py'
+adding 'magenta/pipelines/pipelines_common.py'
+adding 'magenta/pipelines/statistics.py'
+adding 'magenta/protobuf/__init__.py'
+adding 'magenta/protobuf/generator_pb2.py'
+adding 'magenta/protobuf/music_pb2.py'
+adding 'magenta/scripts/__init__.py'
+adding 'magenta/scripts/convert_dir_to_note_sequences.py'
+adding 'magenta/tools/__init__.py'
+adding 'magenta/tools/pip/__init__.py'
+adding 'magenta/tools/pip/setup.py'
+adding 'magenta_gpu-0.3.1.dist-info/DESCRIPTION.rst'
+adding 'magenta_gpu-0.3.1.dist-info/entry_points.txt'
+adding 'magenta_gpu-0.3.1.dist-info/metadata.json'
+adding 'magenta_gpu-0.3.1.dist-info/top_level.txt'
+adding 'magenta_gpu-0.3.1.dist-info/WHEEL'
+adding 'magenta_gpu-0.3.1.dist-info/METADATA'
+adding 'magenta_gpu-0.3.1.dist-info/RECORD'
+/magenta
+Sun Oct 1 13:55:42 UTC 2017 : === Output wheel file is in: /tmp/magenta_pkg
+ ---> 4d5582f67b78
+Removing intermediate container 70e0cb8cb691
+Step 31/31 : CMD bash
+ ---> Running in d68d334bf92f
+ ---> b96caeffe1b8
+Removing intermediate container d68d334bf92f
+Successfully built b96caeffe1b8
