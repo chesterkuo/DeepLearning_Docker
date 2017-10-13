@@ -65,7 +65,7 @@ RUN echo "startup --batch" >>/etc/bazel.bazelrc
 RUN echo "build --spawn_strategy=standalone --genrule_strategy=standalone" \
     >>/etc/bazel.bazelrc
 # Install the most recent bazel release.
-ENV BAZEL_VERSION 0.5.4
+ENV BAZEL_VERSION 0.5.0
 WORKDIR /
 RUN mkdir /bazel && \
     cd /bazel && \
@@ -80,25 +80,28 @@ RUN mkdir /bazel && \
 
 RUN git clone https://github.com/tensorflow/tensorflow.git && \
     cd tensorflow && \
-    git checkout r1.3
+    git checkout v1.3.1
 WORKDIR /tensorflow
 
 # Configure the build for our CUDA configuration.
 ENV CI_BUILD_PYTHON python
-ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH /usr/local/nvidia/lib64:/usr/local/cuda/lib64/stubs:/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 ENV TF_NEED_CUDA 1
 ENV TF_CUDA_COMPUTE_CAPABILITIES=3.0,3.5,5.2,6.0,6.1
+RUN echo "/usr/local/cuda-8.0/targets/x86_64-linux/lib/stubs" >> /etc/ld.so.conf.d/cuda-8-0.conf
+RUN echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/cuda-8-0.conf
+RUN ln -s /usr/local/cuda/lib64/stubs/libcuda.so /usr/local/cuda/lib64/stubs/libcuda.so.1
+RUN ldconfig
 
 RUN tensorflow/tools/ci_build/builds/configured GPU \
-    bazel build -c opt --config=cuda --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" \
+    bazel build --config=opt --config=cuda --cxxopt="-D_GLIBCXX_USE_CXX11_ABI=0" \
         tensorflow/tools/pip_package:build_pip_package && \
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip && \
-    pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl && \
-    rm -rf /tmp/pip && \
-    rm -rf /root/.cache
+    pip --no-cache-dir install --upgrade /tmp/pip/tensorflow-*.whl
+#rm -rf /tmp/pip && \
+#    rm -rf /root/.cache
 # Clean up pip wheel and Bazel cache when done.
 
-WORKDIR /root
 
 # TensorBoard
 EXPOSE 6006
