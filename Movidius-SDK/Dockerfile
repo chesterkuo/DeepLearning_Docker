@@ -1,11 +1,6 @@
 FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 MAINTAINER Chester Kuo <chester.kuo@gmail.com>
 
-ENV http_proxy http://proxy-chain.intel.com:911
-ENV https_proxy https://proxy-chain.intel.com:912
-ENV HTTP_PROXY http://proxy-chain.intel.com:911
-ENV HTTPS_PROXY https://proxy-chain.intel.com:912
-
 ENV PYTHONPATH /opt/movidius/mvnc/python:${PYTHONPATH}
 ARG TF_VERSION
 
